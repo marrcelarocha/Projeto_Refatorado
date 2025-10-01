@@ -72,7 +72,6 @@ class Pedido:
 
     def adicionar_item(self, item: ItemCardapio):
         self.itens.append(item)
-        print(f"Item '{item.nome}' adicionado ao carrinho.")
 
     def resumo(self):
         total = sum(item.preco for item in self.itens)
@@ -85,11 +84,11 @@ class Pedido:
 class Pagamento(ABC):
     def __init__(self, descricao):
         self._descricao = descricao
-    
+
     @property
     def descricao(self):
         return self._descricao
-    
+
     @abstractmethod
     def processar(self, valor):
         pass
@@ -98,11 +97,11 @@ class PagamentoPix(Pagamento):
     def __init__(self, chave_pix):
         super().__init__("Pagamento via PIX")
         self._chave_pix = chave_pix
-    
+
     @property
     def chave_pix(self):
         return self._chave_pix
-    
+
     def processar(self, valor):
         print(f"Pagamento de R$ {valor:.2f} realizado via PIX.")
         print(f"Chave PIX: {self._chave_pix}")
@@ -114,15 +113,15 @@ class PagamentoCartao(Pagamento):
         self._numero_cartao = numero_cartao
         self._titular = titular
         self._cvv = cvv
-    
+
     @property
     def numero_cartao(self):
         return self._numero_cartao
-    
+
     @property
     def titular(self):
         return self._titular
-    
+
     def processar(self, valor):
         print(f"Pagamento de R$ {valor:.2f} realizado no Cartão.")
         print(f"Cartão: **** **** **** {self._numero_cartao[-4:]}")
@@ -140,19 +139,19 @@ class SistemaDelivery:
         pizza_place.adicionar_item(ItemCardapio("Pizza Calabresa", 52.50))
         pizza_place.adicionar_item(ItemCardapio("Pizza Quatro Queijos", 58.00))
         self.restaurantes["pizza do zé"] = pizza_place
-        
+
         burger_kingdom = Restaurante("burger kingdom", "hamburgueria")
         burger_kingdom.adicionar_item(ItemCardapio("X-Burger", 22.90))
         burger_kingdom.adicionar_item(ItemCardapio("X-Bacon", 28.50))
         burger_kingdom.adicionar_item(ItemCardapio("X-Tudo", 35.00))
         self.restaurantes["burger kingdom"] = burger_kingdom
-        
+
         sushi_house = Restaurante("sushi house", "japonesa")
         sushi_house.adicionar_item(ItemCardapio("Temaki", 18.90))
         sushi_house.adicionar_item(ItemCardapio("Sashimi", 32.00))
         sushi_house.adicionar_item(ItemCardapio("Combo Sushi", 45.50))
         self.restaurantes["sushi house"] = sushi_house
-        
+
         feijoada_do_joao = Restaurante("feijoada do joão", "brasileira")
         feijoada_do_joao.adicionar_item(ItemCardapio("Feijoada Completa", 35.90))
         feijoada_do_joao.adicionar_item(ItemCardapio("Prato Executivo", 22.50))
@@ -232,19 +231,24 @@ class SistemaDelivery:
 
         total = pedido.resumo()
         metodo = input("Escolha método de pagamento (pix/cartao): ").strip().lower()
+
+        # ⭐⭐ POLIMORFISMO CORRETO - Cria objeto primeiro, depois chama processar()
+        pagamento = None
         
         if metodo == "pix":
             chave = input("Digite sua chave PIX: ").strip()
-            PagamentoPix(chave).processar(total)
+            pagamento = PagamentoPix(chave)
         elif metodo == "cartao":
             numero = input("Número do cartão: ").strip()
             titular = input("Titular do cartão: ").strip()
             cvv = input("CVV: ").strip()
-            PagamentoCartao(numero, titular, cvv).processar(total)
+            pagamento = PagamentoCartao(numero, titular, cvv)
         else:
             print("Método inválido, pedido cancelado.\n")
             return
-            
+
+        # ⭐⭐ CHAMADA POLIMÓRFICA - mesma interface, comportamento diferente
+        pagamento.processar(total)
         self.simular_entrega(restaurante)
 
 def menu():
