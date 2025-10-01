@@ -4,9 +4,9 @@ from Interface import (
     menu_entrada_usuario, 
     menu_usuario
 )
-from SistemaDeDelivery import SistemaDelivery
-from ItemCardapio import ItemCardapio
-from Pedido import Pedido
+from Classes.SistemaDeDelivery import SistemaDelivery
+from Classes.ItemCardapio import ItemCardapio
+from Classes.Pedido import Pedido
 
 def menu():
     sistema = SistemaDelivery.get_instancia()
