@@ -1,66 +1,98 @@
 # 🍽️ Otavio's Food Service
 
-Um sistema simples de **delivery online** feito em **Python**,
-utilizando POO (*Programação Orientada a Objetos*).\
-Ele permite cadastrar restaurantes, adicionar itens ao cardápio, fazer
-pedidos e processar pagamentos.
+Um sistema simples de **delivery online** feito em **Python**, utilizando POO (*Programação Orientada a Objetos*).  
+Permite cadastrar restaurantes, adicionar itens ao cardápio, criar usuários, fazer pedidos e processar pagamentos, utilizando padrões de projeto como **Builder**, **Singleton** e **Factory Method**.
 
 ------------------------------------------------------------------------
 
 ## 📌 Funcionalidades
 
-✅ **Gerenciamento de Restaurantes** - Cadastro de novos restaurantes -
-Listagem de todos os restaurantes - Filtragem por categoria - Remoção de
-restaurantes
+✅ **Gerenciamento de Restaurantes**  
+- Cadastro de novos restaurantes  
+- Listagem de todos os restaurantes  
+- Filtragem por categoria  
+- Remoção de restaurantes  
 
-✅ **Gerenciamento de Cardápio** - Adicionar itens ao cardápio de cada
-restaurante - Remover itens - Visualizar o cardápio completo
+✅ **Gerenciamento de Cardápio**  
+- Adicionar itens ao cardápio de cada restaurante  
+- Remover itens  
+- Visualizar cardápio completo  
 
-✅ **Sistema de Pedidos** - Selecionar restaurante - Escolher itens do
-cardápio - Gerar resumo do pedido com preço total
+✅ **Gerenciamento de Usuários**  
+- Cadastro de usuários utilizando **Builder**  
+- Login e logout  
+- Consultar detalhes do perfil e histórico de pedidos  
 
-✅ **Pagamentos** - **PIX** (exibe chave PIX) - **Cartão de crédito**
-(exibe número mascarado)
+✅ **Sistema de Pedidos**  
+- Selecionar restaurante  
+- Escolher itens do cardápio  
+- Adicionar/remover itens do carrinho  
+- Gerar resumo do pedido com preço total  
 
-✅ **Simulação de Entrega** - Exibe mensagens de saída para entrega e
-entrega concluída
+✅ **Pagamentos**  
+- **PIX** (exibe chave PIX)  
+- **Cartão de crédito** (exibe número mascarado)  
+- Implementado com **Factory Method**  
 
-OBS: Existem funcionalidades dentro de outras funcionalidades.
+✅ **Simulação de Entrega**  
+- Exibe mensagens de saída para entrega e entrega concluída  
 
-
-------------------------------------------------------------------------
+---
 
 ## 🛠️ Tecnologias Utilizadas
 
--   Paradigma **POO**
--   Módulo `abc` para classes abstratas
+- Paradigma **POO** (Programação Orientada a Objetos)  
+- Módulo `abc` para classes abstratas  
+- Padrões de projeto: **Builder**, **Singleton**, **Factory Method**  
 
-------------------------------------------------------------------------
+---
 
 ## 📂 Estrutura do Código
 
--   `ItemCardapio` → representa um item do cardápio
--   `Restaurante` → gerencia nome, categoria e lista de itens
--   `Pedido` → adiciona itens e calcula o total
--   `Pagamento` (classe abstrata) → define interface para pagamentos
--   `PagamentoPix` e `PagamentoCartao` → implementam métodos de
-    pagamento
--   `SistemaDelivery` → gerencia restaurantes, pedidos e fluxo do
-    sistema
--   `menu()` → interface simples no terminal para o usuário
+- `Classes/` → pasta contendo todas as classes:
+  - `Usuario.py` → representa o usuário  
+  - `UsuarioBuilder.py` → construtor passo a passo do usuário  
+  - `UsuarioDiretor.py` → diretor para construir usuários completos  
+  - `SistemaDeDelivery.py` → gerencia restaurantes, pedidos e usuários  
+  - `Restaurante.py` → gerencia nome, categoria e lista de itens  
+  - `ItemCardapio.py` → representa um item do cardápio  
+  - `Pedido.py` → adiciona itens e calcula o total  
+  - `Pagamento*.py` → implementações de pagamento (Pix e Cartão)  
 
-------------------------------------------------------------------------
+- `main.py` → arquivo principal que executa o sistema  
+- `interface.py` → funções de menu e interação com o usuário  
+
+---
 
 ## ▶️ Como Executar
 
-1.  Certifique-se de ter **Python 3** instalado:
+1. Certifique-se de ter **Python 3** instalado:
 
-    ``` bash
-    python --version
-    ```
+```bash
+python --version
+```
 
-2.  Rode o arquivo principal:
+2. Execute o arquivo principal:
 
-    ``` bash
-    python nome_do_arquivo.py
-    ```
+```bash
+python main.py
+```
+
+3. Siga os menus no terminal para:
+
+- Cadastrar restaurantes e usuários
+- Adicionar itens ao cardápio
+- Fazer pedidos e processar pagamentos
+- Consultar carrinho e histórico
+
+---
+
+## ⚙️ Observações
+
+- Todos os arquivos de classes estão dentro da pasta `Classes/`.
+- `main.py` deve ser executado **a partir da raiz do projeto** para que os imports funcionem corretamente.
+- O cadastro de usuários utiliza **Builder**, permitindo adicionar informações passo a passo.
+- O sistema garante **uma única instância** de `SistemaDelivery` com o padrão **Singleton**.
+
+
+
