@@ -5,6 +5,7 @@ from Classes.State import (AguardandoPagamento,
                            Preparando,
                            Entregue)
 from Classes.Observer import PedidoNotifier
+from Classes.Strategy import (Contexto, PrimeiraCompra, Cupom10, Cupom25)
 
 # context
 class Pedido:
@@ -25,8 +26,30 @@ class Pedido:
 
     def resumo(self):
         total = sum(item.preco for item in self.itens)
+
+        print("Escolha alguma promoção:")
+        print("1 - PRIMEIRACOMPRA")
+        print("2 - CUPOM10")
+        print("3 - CUPOM25")
+
+        promocao = input("Digite o número da promoção: ")
+        contexto = Contexto()
+        if promocao == "1":
+            contexto.strategy = PrimeiraCompra()
+        elif promocao == "2":
+            contexto.strategy = Cupom10()
+        elif promocao == "3":
+            contexto.strategy = Cupom25()
+        else:
+            print("Promoção inválida, sem desconto aplicado.")
+            resultado = total
+            return resultado
+
+        resultado = contexto.executar_strategy(total)
+
         print("\nResumo do Pedido:")
         for item in self.itens:
             print(f" - {item}")
-        print(f"Total a pagar: R$ {total:.2f}\n")
-        return total
+        print(f"Total sem desconto: R$ {total:.2f}\n")
+        print(f"Total com desconto: R$ {resultado:.2f}\n")
+        return resultado
