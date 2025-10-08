@@ -1,7 +1,7 @@
 # 🍽️ Otavio's Food Service
 
 Um sistema simples de **delivery online** feito em **Python**, utilizando POO (*Programação Orientada a Objetos*).  
-Permite cadastrar restaurantes, adicionar itens ao cardápio, criar usuários, fazer pedidos e processar pagamentos, utilizando padrões de projeto como **Builder**, **Singleton** , **Factory Method**, **Observer** e **State**
+Permite cadastrar restaurantes, adicionar itens ao cardápio, criar usuários, fazer pedidos e processar pagamentos, utilizando padrões de projeto como **Builder**, **Singleton** , **Factory Method**, **Observer**, **State** e **Strategy**
 
 ------------------------------------------------------------------------
 
@@ -44,7 +44,7 @@ Permite cadastrar restaurantes, adicionar itens ao cardápio, criar usuários, f
 - Paradigma **POO** (Programação Orientada a Objetos)  
 - Módulo `abc` para classes abstratas  
 - Padrões de projeto criacionais: **Builder**, **Singleton**, **Factory Method**
-- Padrões de projeto comportamentais: **Observer**, **State**
+- Padrões de projeto comportamentais: **Observer**, **State**, **Strategy**
 
 ---
 
@@ -61,6 +61,7 @@ Permite cadastrar restaurantes, adicionar itens ao cardápio, criar usuários, f
   - `Pagamento*.py` → implementações de pagamento (Pix e Cartão)
   - `State.py` → implementa passo a passo o padrão comportamental state
   - `Observer.py` → implementa passo a passo o padrão comportamental observer
+  - `Strategy.py` → implementa passo a passo o padrão comportamental strategy
 
 - `main.py` → arquivo principal que executa o sistema  
 - `interface.py` → funções de menu e interação com o usuário  
