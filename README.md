@@ -43,7 +43,8 @@ Permite cadastrar restaurantes, adicionar itens ao cardápio, criar usuários, f
 
 - Paradigma **POO** (Programação Orientada a Objetos)  
 - Módulo `abc` para classes abstratas  
-- Padrões de projeto: **Builder**, **Singleton**, **Factory Method**  
+- Padrões de projeto criacionais: **Builder**, **Singleton**, **Factory Method**
+- Padrões de projeto comportamentais: **Observer**, **State**
 
 ---
 
@@ -57,7 +58,9 @@ Permite cadastrar restaurantes, adicionar itens ao cardápio, criar usuários, f
   - `Restaurante.py` → gerencia nome, categoria e lista de itens  
   - `ItemCardapio.py` → representa um item do cardápio  
   - `Pedido.py` → adiciona itens e calcula o total  
-  - `Pagamento*.py` → implementações de pagamento (Pix e Cartão)  
+  - `Pagamento*.py` → implementações de pagamento (Pix e Cartão)
+  - `State.py` → implementa passo a passo o padrão comportamental state
+  - `Observer.py` → implementa passo a passo o padrão comportamental observer
 
 - `main.py` → arquivo principal que executa o sistema  
 - `interface.py` → funções de menu e interação com o usuário  
