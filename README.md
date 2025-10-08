@@ -1,7 +1,7 @@
 # 🍽️ Otavio's Food Service
 
 Um sistema simples de **delivery online** feito em **Python**, utilizando POO (*Programação Orientada a Objetos*).  
-Permite cadastrar restaurantes, adicionar itens ao cardápio, criar usuários, fazer pedidos e processar pagamentos, utilizando padrões de projeto como **Builder**, **Singleton** e **Factory Method**.
+Permite cadastrar restaurantes, adicionar itens ao cardápio, criar usuários, fazer pedidos e processar pagamentos, utilizando padrões de projeto como **Builder**, **Singleton** , **Factory Method**, **Observer** e **State**
 
 ------------------------------------------------------------------------
 
