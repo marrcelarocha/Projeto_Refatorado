@@ -7,9 +7,13 @@ from Interface import (
 from Classes.SistemaDeDelivery import SistemaDelivery
 from Classes.ItemCardapio import ItemCardapio
 from Classes.Pedido import Pedido
+from Classes.Observer import (NotificacaoRestaurante, 
+                            NotificacaoUsuario, 
+                            PedidoNotifier)
 
 def menu():
     sistema = SistemaDelivery.get_instancia()
+
     while True:
         menu_principal()
         opcao = input()
@@ -93,6 +97,9 @@ def menu():
                                     user_logado.adicionar_item(item)
                                     if pedido_atual is None or pedido_atual.restaurante != rest:
                                         pedido_atual = Pedido(rest)
+                                        # REGISTRA OS OBSERVER NO PUBLISHER
+                                        pedido_atual.notifier.adicionar_subscriber(NotificacaoUsuario())
+                                        pedido_atual.notifier.adicionar_subscriber(NotificacaoRestaurante())
                                     pedido_atual.adicionar_item(item)
                                 else:
                                     print("Prato não encontrado no cardápio.\n")
@@ -119,6 +126,8 @@ def menu():
                         elif op == "4":
                             if pedido_atual and pedido_atual.itens:
                                 sistema.fazer_pedido(pedido_atual)
+                                pedido_atual.avancar_estado()
+                                pedido_atual.avancar_estado()
                                 user_logado.carrinho.clear()
                                 pedido_atual = None
                             else:

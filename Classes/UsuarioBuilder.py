@@ -1,6 +1,6 @@
-from Usuario import Usuario
+from Classes.Usuario import Usuario
 
-## responsável por montar o usuário passo a passo
+# responsável por montar o usuário passo a passo
 class UsuarioBuilder:
     def __init__(self):
         self.usuario = Usuario(nome="", 

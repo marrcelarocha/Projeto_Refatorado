@@ -1,4 +1,4 @@
-from ItemCardapio import ItemCardapio
+from Classes.ItemCardapio import ItemCardapio
 
 class Restaurante:
     def __init__(self, nome, categoria):

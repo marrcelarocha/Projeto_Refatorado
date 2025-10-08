@@ -1,5 +1,4 @@
-
-## responsável por usar o builder na ordem correta
+# responsável por usar o builder na ordem correta
 class UsuarioDiretor:
     def __init__(self, builder):
         self.builder = builder

@@ -1,6 +1,6 @@
-from ItemCardapio import ItemCardapio
+from Classes.ItemCardapio import ItemCardapio
 
-## produto final
+# produto final
 class Usuario:
     def __init__(self, nome, login, senha):
         self.nome = nome
@@ -12,15 +12,15 @@ class Usuario:
         self.telefone = None
         self.historico_pedidos = []
 
-    ## metódo para adicionar endereço
+    # metódo para adicionar endereço
     def definir_endereco(self, endereco):
         self.endereco = endereco
     
-    ## método para adicionar telefone
+    # método para adicionar telefone
     def definir_telefone(self, telefone):
         self.telefone = telefone
     
-    ## método para adicionar um pedido ao histórico
+    # método para adicionar um pedido ao histórico
     def definir_historico(self, pedido):
         self.historico_pedidos.append(pedido)
 

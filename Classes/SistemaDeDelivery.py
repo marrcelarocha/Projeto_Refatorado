@@ -1,9 +1,9 @@
-from Restaurante import Restaurante
-from Usuario import Usuario
-from Pedido import Pedido
-from FactoryMethod import (Pagamento, PagamentoFactory, PagamentoCartao, PagamentoCartaoFactory, PagamentoPix, PagamentoPixFactory)
-from UsuarioBuilder import UsuarioBuilder
-from UsuarioDiretor import UsuarioDiretor
+from Classes.Restaurante import Restaurante
+from Classes.Usuario import Usuario
+from Classes.Pedido import Pedido
+from Classes.FactoryMethod import (Pagamento, PagamentoFactory, PagamentoCartao, PagamentoCartaoFactory, PagamentoPix, PagamentoPixFactory)
+from Classes.UsuarioBuilder import UsuarioBuilder
+from Classes.UsuarioDiretor import UsuarioDiretor
 
 usuarios_registrados = {}
 usuario_logado = None
