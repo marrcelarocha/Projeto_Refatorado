@@ -7,8 +7,9 @@ from Classes.State import (AguardandoPagamento,
 from Classes.Observer import PedidoNotifier
 from Classes.Strategy import (Contexto, PrimeiraCompra, Cupom10, Cupom25)
 
-# context
-class Pedido:
+# CONTEXT (STRATEGY)
+# COMPONENTE CONCRETO (DECORATOR)
+class Pedido():
     def __init__(self, restaurante: Restaurante):
         self.restaurante = restaurante
         self.itens = []
@@ -53,3 +54,6 @@ class Pedido:
         print(f"Total sem desconto: R$ {total:.2f}\n")
         print(f"Total com desconto: R$ {resultado:.2f}\n")
         return resultado
+    
+    def preco(self):
+        return sum(item.preco for item in self.itens)

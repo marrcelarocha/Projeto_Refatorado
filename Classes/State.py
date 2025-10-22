@@ -4,7 +4,7 @@ class EstadoPedido:
     def avancar(self, pedido):
         raise NotImplementedError("Cada estado deve implementar o método avancar.")
 
-#
+# Classes para cada estado
 class AguardandoPagamento(EstadoPedido):
     def avancar(self, pedido):
         pedido.estado = Preparando()

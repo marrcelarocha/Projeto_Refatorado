@@ -4,6 +4,7 @@ from Classes.Pedido import Pedido
 from Classes.FactoryMethod import (Pagamento, PagamentoFactory, PagamentoCartao, PagamentoCartaoFactory, PagamentoPix, PagamentoPixFactory)
 from Classes.UsuarioBuilder import UsuarioBuilder
 from Classes.UsuarioDiretor import UsuarioDiretor
+from Classes.Decorator import PedidoDecorator
 
 usuarios_registrados = {}
 usuario_logado = None
@@ -104,7 +105,27 @@ class SistemaDelivery:
         print("Pedido entregue com sucesso!\n")
 
     def fazer_pedido(self, pedido: Pedido):
-        total = pedido.resumo()
+
+        decorado = PedidoDecorator(pedido)
+
+        print("Deseja adicionar opcionais?")
+        print("1 - Embalagem Premium (+R$5.00)")
+        print("2 - Entrega Rápida (+R$6.00)")
+        print("3 - Ambos")
+        print("4 - Nenhum")
+        
+        opcao = input("Escolha uma opção: ")
+
+        if opcao == "1":
+            decorado.adicionar_embalagem_premium()
+        elif opcao == "2":
+            decorado.adicionar_entrega_rapida()
+        elif opcao == "3":
+            decorado.adicionar_embalagem_premium()
+            decorado.adicionar_entrega_rapida()
+
+        total_final = decorado.resumo()
+
         metodo = input("Escolha método de pagamento (pix/cartao): ").strip().lower()
 
         # ⭐⭐ POLIMORFISMO CORRETO - Cria objeto primeiro, depois chama processar()
@@ -124,4 +145,4 @@ class SistemaDelivery:
         
         pagamento = fabrica.criar_pagamento()        
         
-        pagamento.processar(total)
+        pagamento.processar(total_final)
