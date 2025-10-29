@@ -1,41 +1,46 @@
 # 🍽️ Otavio's Food Service
 
 Um sistema simples de **delivery online** feito em **Python**, utilizando POO (*Programação Orientada a Objetos*).  
-Permite cadastrar restaurantes, adicionar itens ao cardápio, criar usuários, fazer pedidos e processar pagamentos, utilizando padrões de projeto como **Builder**, **Singleton** , **Factory Method**, **Observer**, **State** e **Strategy**
+Permite cadastrar restaurantes, adicionar itens ao cardápio, criar usuários, fazer pedidos e processar pagamentos, utilizando padrões de projeto como **Builder**, **Singleton** , **Factory Method**, **Observer**, **State**, **Strategy**, **Decorator**, **Facade** e **Compositer**
+
 
 ------------------------------------------------------------------------
 
 ## 📌 Funcionalidades
 
 ✅ **Gerenciamento de Restaurantes**  
-- Cadastro de novos restaurantes  
-- Listagem de todos os restaurantes  
+- Cadastro e listagem de restaurantes  
 - Filtragem por categoria  
 - Remoção de restaurantes  
 
 ✅ **Gerenciamento de Cardápio**  
-- Adicionar itens ao cardápio de cada restaurante  
-- Remover itens  
-- Visualizar cardápio completo  
+- Adicionar e remover itens  
+- Visualizar o cardápio completo  
+- Criação de **combos de produtos** com o padrão **Composite**
 
 ✅ **Gerenciamento de Usuários**  
-- Cadastro de usuários utilizando **Builder**  
+- Cadastro de usuários com o padrão **Builder**  
 - Login e logout  
-- Consultar detalhes do perfil e histórico de pedidos  
+- Exibição de perfil e histórico de pedidos  
 
 ✅ **Sistema de Pedidos**  
 - Selecionar restaurante  
-- Escolher itens do cardápio  
-- Adicionar/remover itens do carrinho  
-- Gerar resumo do pedido com preço total  
+- Adicionar itens ou **combos** ao carrinho  
+- Remover itens  
+- Gerar resumo com aplicação dinâmica de descontos (Strategy)  
 
 ✅ **Pagamentos**  
-- **PIX** (exibe chave PIX)  
-- **Cartão de crédito** (exibe número mascarado)  
-- Implementado com **Factory Method**  
+- Pagamento via **PIX** ou **Cartão de Crédito**  
+- Implementado com o padrão **Factory Method**
 
 ✅ **Simulação de Entrega**  
-- Exibe mensagens de saída para entrega e entrega concluída  
+- Transição de estados do pedido (aguardando pagamento → preparando → entregue)  
+- Implementada com o padrão **State**  
+- Envio automático de notificações usando **Observer**
+
+✅ **Interface Simplificada**  
+- O padrão **Facade** centraliza o acesso às principais operações do sistema (usuários, pedidos, restaurantes etc.)  
+- Facilita o uso da aplicação a partir do arquivo `main.py`
 
 ---
 
@@ -45,6 +50,7 @@ Permite cadastrar restaurantes, adicionar itens ao cardápio, criar usuários, f
 - Módulo `abc` para classes abstratas  
 - Padrões de projeto criacionais: **Builder**, **Singleton**, **Factory Method**
 - Padrões de projeto comportamentais: **Observer**, **State**, **Strategy**
+- Padrões de projeto estruturais: **Decorator**, **Facade**, **Compositer**
 
 ---
 
