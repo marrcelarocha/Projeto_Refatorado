@@ -1,5 +1,5 @@
 from Classes.Restaurante import Restaurante
-from Classes.ItemCardapio import ItemCardapio
+from Classes.ItemComponente import ItemComponente
 from Classes.State import (AguardandoPagamento,
                            EstadoPedido,
                            Preparando,
@@ -16,17 +16,17 @@ class Pedido():
         self.estado = AguardandoPagamento()
         self.notifier = PedidoNotifier()
 
-    def adicionar_item(self, item: ItemCardapio):
+    def adicionar_item(self, item: ItemComponente):
         self.itens.append(item)
 
-    def remover_item(self, item: ItemCardapio):
+    def remover_item(self, item: ItemComponente):
         self.itens.remove(item)
 
     def avancar_estado(self):
         self.estado.avancar(self)
 
     def resumo(self):
-        total = sum(item.preco for item in self.itens)
+        total = sum(item.get_preco() for item in self.itens)
 
         print("Escolha alguma promoção:")
         print("1 - PRIMEIRACOMPRA")
@@ -56,4 +56,4 @@ class Pedido():
         return resultado
     
     def preco(self):
-        return sum(item.preco for item in self.itens)
+        return sum(item.get_preco() for item in self.itens)

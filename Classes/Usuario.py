@@ -1,4 +1,4 @@
-from Classes.ItemCardapio import ItemCardapio
+from Classes.ItemComponente import  ItemComponente
 
 # produto final
 class Usuario:
@@ -33,14 +33,14 @@ class Usuario:
     def senha(self, valor):
         self._senha = valor
     
-    def adicionar_item(self, item: ItemCardapio):
-        if isinstance(item, ItemCardapio):
+    def adicionar_item(self, item: ItemComponente):
+        if isinstance(item, ItemComponente):
             self.carrinho.append(item)
             print(f"Item '{item.nome}' adicionado ao carrinho!\n")
         else:
-            print("Erro: apenas objetos ItemCardapio podem ser adicionados.\n")
+            print("Erro: apenas objetos ItemComponente podem ser adicionados.\n")
 
-    def remover_item(self, item: ItemCardapio):
+    def remover_item(self, item: ItemComponente):
         if item in self.carrinho:
             self.carrinho.remove(item)
             print(f"Item '{item.nome}' removido do carrinho!\n")
@@ -53,7 +53,7 @@ class Usuario:
             return
         print(f"Carrinho de {self.nome.capitalize()}:")
         for item in self.carrinho:
-            print(f" - {item}")
+            item.exibir_detalhes(nivel=1)
         print()
 
     def avaliar_prato(self):
