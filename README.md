@@ -68,7 +68,12 @@ Permite cadastrar restaurantes, adicionar itens ao cardápio, criar usuários, f
   - `State.py` → implementa passo a passo o padrão comportamental state
   - `Observer.py` → implementa passo a passo o padrão comportamental observer
   - `Strategy.py` → implementa passo a passo o padrão comportamental strategy
-
+  - `Decorator.py` → Implementa o padrão Decorator (comportamentos extras em pedidos)
+  - `DeliveryFacade.py` → Implementa o padrão Facade (interface simplificada para o sistema)
+  - `FactoryMethod.py` → Criação de objetos de pagamento (Pix, Cartão, etc.)
+  - `ItemCombo.py` → Implementa o padrão Composite (combina múltiplos itens em um combo)
+  - `ItemComponente.py` → Interface abstrata do Composite
+  - `ItemSimples.py` → Representa itens individuais do cardápio
 - `main.py` → arquivo principal que executa o sistema  
 - `interface.py` → funções de menu e interação com o usuário  
 
