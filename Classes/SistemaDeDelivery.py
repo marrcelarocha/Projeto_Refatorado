@@ -1,10 +1,14 @@
 from Classes.Restaurante import Restaurante
-from Classes.Usuario import Usuario
 from Classes.Pedido import Pedido
 from Classes.FactoryMethod import (Pagamento, PagamentoFactory, PagamentoCartao, PagamentoCartaoFactory, PagamentoPix, PagamentoPixFactory)
 from Classes.UsuarioBuilder import UsuarioBuilder
 from Classes.UsuarioDiretor import UsuarioDiretor
 from Classes.Decorator import PedidoDecorator
+from Classes.Excecoes import (
+    BuilderIncompleteError,
+    FactoryResolutionError,
+    ValidationError,
+)
 
 usuarios_registrados = {}
 usuario_logado = None
@@ -48,10 +52,12 @@ class SistemaDelivery:
         telefone = input("Telefone: ").strip()
 
         # diretor constrói usuário completo
-        usuario_final = diretor.construir_usuario_completo(
-        nome, login, senha, endereco, telefone
-        )
-
+        try:
+            usuario_final = diretor.construir_usuario_completo(nome, login, senha, endereco, telefone)
+        except BuilderIncompleteError as e:
+            print(f"\n[ERRO] {e}\n")
+            return
+        
         if login in usuarios_registrados:
             print("Este login já existe. Tente outro.")
         else:
@@ -131,18 +137,42 @@ class SistemaDelivery:
         # ⭐⭐ POLIMORFISMO CORRETO - Cria objeto primeiro, depois chama processar()
         pagamento = None
         
-        if metodo == "pix":
-            chave = input("Digite sua chave PIX: ").strip()
-            fabrica = PagamentoPixFactory(chave)
-        elif metodo == "cartao":
-            numero = input("Número do cartão: ").strip()
-            titular = input("Titular do cartão: ").strip()
-            cvv = input("CVV: ").strip()
-            fabrica = PagamentoCartaoFactory(numero, titular, cvv)
+        try:
+            if metodo == "pix":
+                chave = input("Digite sua chave PIX: ").strip()
+                if not chave:
+                    raise ValidationError("Chave PIX não pode ser vazia.")
+                fabrica = PagamentoPixFactory(chave)
+            
+            elif metodo == "cartao":
+                numero  = input("Número do cartão: ").strip()
+                titular = input("Titular do cartão: ").strip()
+                cvv     = input("CVV: ").strip()
+                # validações básicas
+                if not (numero and titular and cvv):
+                    raise ValidationError("Número, titular e CVV são obrigatórios.")
+                if not numero.isdigit():
+                    raise ValidationError("Número do cartão deve conter apenas dígitos.")
+                if not cvv.isdigit() or len(cvv) not in (3, 4):
+                    raise ValidationError("CVV deve ser numérico (3 ou 4 dígitos).")
+                fabrica = PagamentoCartaoFactory(numero, titular, cvv)
+            
+            else:
+                raise FactoryResolutionError("metodo_pagamento", metodo, registered=["pix", "cartao"])
+                
+        except FactoryResolutionError as e:
+            print(f"[ERRO] Método de pagamento inválido: {e}")
+            raise
+        
+        except ValidationError as e:
+            print(f"[ERRO] {e}")
+            raise
+
+        except Exception as e:
+            # Erros inesperados
+            print(f"[ERRO INESPERADO] {e}")
+            raise
+
         else:
-            print("Método inválido, pedido cancelado.\n")
-            return
-        
-        pagamento = fabrica.criar_pagamento()        
-        
-        pagamento.processar(total_final)
+            pagamento = fabrica.criar_pagamento()        
+            pagamento.processar(total_final)

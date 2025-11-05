@@ -2,6 +2,7 @@ from Classes.SistemaDeDelivery import SistemaDelivery
 from Classes.Pedido import Pedido
 from Classes.Observer import NotificacaoUsuario, NotificacaoRestaurante
 from Classes.ItemComponente import ItemComponente
+from Classes.Excecoes import DeliveryError
 
 class DeliveryFacade:
     def __init__(self):
@@ -55,7 +56,15 @@ class DeliveryFacade:
         pedido.remover_item(item)
 
     def finalizar_pedido(self, pedido):
-        self.sistema.fazer_pedido(pedido)
-        pedido.avancar_estado()
-        pedido.avancar_estado()
-        self.sistema.simular_entrega(pedido.restaurante)
+        try:
+            self.sistema.fazer_pedido(pedido)
+
+        except DeliveryError as e:
+            print(f"[ERRO] Falha ao finalizar pedido: {e}")
+            return
+
+        else:
+            # só executa se nenhuma exceção ocorreu
+            pedido.avancar_estado()
+            pedido.avancar_estado()
+            self.sistema.simular_entrega(pedido.restaurante)
