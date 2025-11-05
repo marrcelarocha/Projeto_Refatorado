@@ -52,26 +52,88 @@ Permite cadastrar restaurantes, adicionar itens ao cardápio, criar usuários, f
 - Padrões de projeto comportamentais: **Observer**, **State**, **Strategy**
 - Padrões de projeto estruturais: **Decorator**, **Facade**, **Compositer**
 
+### ⚙️ Design Patterns e onde se encontram
+
+- `Padrões criacionais` 
+  - `Builder`   
+    - `Usuario.py`
+    - `UsuarioBuilder.py`
+    - `UsuarioDiretor.py`
+  - `Singleton`   
+    - `SistemaDelivery.py`
+  - `Factory Method`   
+    - `FactoryMethod.py`
+- `Padrões comportamentais` 
+  - `Observer`   
+    - `Observer.py`
+  - `State`   
+    - `State.py`
+  - `Strategy`   
+    - `Strategy.py`
+- `Padrões estruturais` 
+  - `Decorator`   
+    - `Decorator.py`
+  - `Facade`   
+    - `DeliveryFacade.py`
+  - `Compositer`   
+    - `ItemCombo.py` 
+    - `ItemComponente.py` 
+    - `ItemSimples.py` 
+---
+
+## 🧩 Tratamento de Exceções no Sistema de Pagamentos
+
+O sistema possui um módulo dedicado chamado `Excecoes.py`, que centraliza todas as exceções personalizadas utilizadas nas demais classes.  
+Essas exceções são projetadas para lidar com diferentes situações de erro dentro do fluxo do sistema de delivery.
+No sistema foi utilizado a exceção do tipo `Try/Except/Else`.
+
+### ⚙️ Hierarquia das Exceções
+Todas as exceções herdam de DeliveryError, que por sua vez herda da classe nativa Exception do Python.
+
+- `Exception` 
+  - `DeliveryError`   
+    - `BuilderIncompleteError` 
+    - `FactoryResolutionError` 
+    - `PaymentError` 
+    - `ValidationError` 
+
+### 🧠 Descrição das Exceções
+
+- `DeliveryError`
+  - **Classe base** para todas as exceções do sistema.
+  - Armazena uma mensagem de erro personalizada e sobrescreve o método __str__ para exibição clara no terminal.
+- `BuilderIncompleteError`
+  - **Origem:** Método de cadastro de usuários na classe SistemaDelivery.
+  - **Quando ocorre:** Quando o UsuarioBuilder não recebe todos os campos necessários para criar um usuário completo.
+- `FactoryResolutionError`
+  - **Origem:** Método de fazer pedido na classe SistemaDelivery.
+  - **Quando ocorre:** Quando o usuário escolhe um método de pagamento inválido (diferente de "pix" ou "cartao").
+- `PaymentError`
+  - **Origem:** Módulos de pagamento (PagamentoPix, PagamentoCartao).
+  - **Quando ocorre:** Quando há falha ao processar o pagamento.
+- `ValidationError`
+  - **Origem:** Validação de entrada de dados (como número do cartão, CVV, chave PIX).
+  - **Quando ocorre:** Quando um dado informado pelo usuário não atende às regras de formato ou obrigatoriedade.
 ---
 
 ## 📂 Estrutura do Código
 
 - `Classes/` → pasta contendo todas as classes:
   - `Usuario.py` → representa o usuário  
-  - `UsuarioBuilder.py` → construtor passo a passo do usuário  
+  - `UsuarioBuilder.py` → construtor passo a passo do usuário; Implementa o padrão **Builder** .
   - `UsuarioDiretor.py` → diretor para construir usuários completos  
-  - `SistemaDeDelivery.py` → gerencia restaurantes, pedidos e usuários  
+  - `SistemaDeDelivery.py` → gerencia restaurantes, pedidos e usuários. **Singleton** implementado, garantindo que uma única instância seja criada.
   - `Restaurante.py` → gerencia nome, categoria e lista de itens  
   - `ItemCardapio.py` → representa um item do cardápio  
   - `Pedido.py` → adiciona itens e calcula o total  
   - `Pagamento*.py` → implementações de pagamento (Pix e Cartão)
-  - `State.py` → implementa passo a passo o padrão comportamental state
-  - `Observer.py` → implementa passo a passo o padrão comportamental observer
-  - `Strategy.py` → implementa passo a passo o padrão comportamental strategy
-  - `Decorator.py` → Implementa o padrão Decorator (comportamentos extras em pedidos)
-  - `DeliveryFacade.py` → Implementa o padrão Facade (interface simplificada para o sistema)
-  - `FactoryMethod.py` → Criação de objetos de pagamento (Pix, Cartão, etc.)
-  - `ItemCombo.py` → Implementa o padrão Composite (combina múltiplos itens em um combo)
+  - `State.py` → implementa passo a passo o padrão comportamental **state**
+  - `Observer.py` → implementa passo a passo o padrão comportamental **observer**
+  - `Strategy.py` → implementa passo a passo o padrão comportamental **strategy**
+  - `Decorator.py` → Implementa o padrão **Decorator** (comportamentos extras em pedidos)
+  - `DeliveryFacade.py` → Implementa o padrão **Facade** (interface simplificada para o sistema)
+  - `FactoryMethod.py` → Criação de objetos de pagamento (Pix, Cartão, etc.); Implementa o padrão **FactoryMethod**
+  - `ItemCombo.py` → Implementa o padrão **Composite** (combina múltiplos itens em um combo)
   - `ItemComponente.py` → Interface abstrata do Composite
   - `ItemSimples.py` → Representa itens individuais do cardápio
 - `main.py` → arquivo principal que executa o sistema  
